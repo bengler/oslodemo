@@ -1,0 +1,31 @@
+svg {
+  font: 10px sans-serif "Helvetica Neue", Helvetica, sans-serif;
+  margin: 20px;
+}
+
+text.title {
+  font: 900 78px "Helvetica Neue", Helvetica, sans-serif;
+  fill: #324654;
+  color: #324654;
+
+}
+
+.rule line {
+  stroke: #fff;
+  stroke-opacity: .2;
+  shape-rendering: crispEdges;
+}
+
+.rule:first-child line {
+  stroke: #000;
+  stroke-opacity: 1;
+}
+
+rect {
+  fill-opacity: .6;
+  fill: #FF765E;
+}
+
+rect:first-child {
+  fill: #B7BDC4;
+}
