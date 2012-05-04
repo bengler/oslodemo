@@ -1,11 +1,11 @@
-var width = 960,
+var width = 660,
     height = 500;
 
 var x = d3.scale.linear()
     .range([0, width]);
 
 var y = d3.scale.linear()
-    .range([0, height - 40]);
+    .range([0, height - 80]);
 
 // An SVG element with a bottom-right origin.
 var svg = d3.select("#chart").append("svg")
@@ -24,31 +24,32 @@ var rules = svg.append("g");
 
 // A label for the current year.
 var title = svg.append("text")
-    .attr("class", "title")
-    .attr("dy", "1em")
-    .attr("dx", ".71em")
-    .attr("transform", "translate(" + x(1) + "," + y(1) + ")scale(-1,-1)")
-    .text(1990);
+  .attr("class", "title")
+  .attr("dy", "0.88em")
+  .attr("dx", ".1em")
+  .attr("transform", "translate(" + x(1) + "," + y(1) + ")scale(-1,-1)")
+  .attr("opacity", ".5")
+  .text(1990)
 
 d3.csv("population_oslo.csv", function(data) {
 
-  // Convert strings to numbers.
-  data.forEach(function(d) {
-    d.people = +d.people;
-    d.year = +d.year;
-    d.age = +d.age;
-  });
+// Convert strings to numbers.
+data.forEach(function(d) {
+  d.people = +d.people;
+  d.year = +d.year;
+  d.age = +d.age;
+});
 
-  // Compute the extent of the data set in age and years.
-  var age0 = 0,
-      age1 = d3.max(data, function(d) { return d.age; }),
-      year0 = d3.min(data, function(d) { return d.year; }),
-      year1 = d3.max(data, function(d) { return d.year; }),
-      year = year0;
+// Compute the extent of the data set in age and years.
+var age0 = 0,
+    age1 = d3.max(data, function(d) { return d.age; }),
+    year0 = d3.min(data, function(d) { return d.year; }),
+    year1 = d3.max(data, function(d) { return d.year; }),
+    year = year0;
 
-  // Update the scale domains.
-  x.domain([0, age1 + 1]);
-  y.domain([0, d3.max(data, function(d) { return d.people; })]);
+// Update the scale domains.
+x.domain([0, age1 + 1]);
+y.domain([0, d3.max(data, function(d) { return d.people; })]);
 
   // Add rules to show the population values.
   rules = rules.selectAll(".rule")
@@ -64,7 +65,16 @@ d3.csv("population_oslo.csv", function(data) {
       .attr("x", 6)
       .attr("dy", ".35em")
       .attr("transform", "rotate(180)")
-      .text(function(d) { return Math.round(d); });
+      .text(function(d) { return d; });
+
+  svg.append("text")
+      .attr("x", 6)
+      .attr("dy", "0px")
+      .attr("class", "axisLabel")
+      .text("Antall")
+      .attr("transform", "rotate(-90)");
+
+
 
   // Add labeled rects for each birthyear.
   var years = body.selectAll("g")
@@ -96,9 +106,20 @@ d3.csv("population_oslo.csv", function(data) {
     .map(data);
 
   yearList = _(data).keys().map( function(i) { i = +i;return i } ).sort()
-  yearIndex = 0
+  var yearIndex = 0
 
-  window.data = data;
+  _(yearList).each(function(eachYear) {
+    e = jQuery('<li/>', {
+        title: eachYear,
+        text: eachYear
+    }).appendTo('#years')
+
+    e.click(function() {
+      changeYear(eachYear);
+    });
+  });
+
+  redraw();
 
   // Allow the arrow keys to change the displayed year.
   d3.select(window).on("keydown", function() {
@@ -114,10 +135,18 @@ d3.csv("population_oslo.csv", function(data) {
     redraw();
   });
 
-  redraw();
+  function changeYear(newYear) {
+    yearIndex = _.indexOf(yearList, newYear);
+    year = newYear;
+    redraw();
+  }
 
   function redraw() {
     if (!(year in data)) return;
+
+    $('ul#years li').removeClass('selected');
+    $('ul#years li').eq(yearIndex).addClass('selected');
+
     title.text(year);
 
     body.transition()
@@ -130,4 +159,5 @@ d3.csv("population_oslo.csv", function(data) {
         .duration(750)
         .attr("height", y);
   }
+  window.redraw = redraw;
 });

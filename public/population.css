@@ -1,18 +1,33 @@
+ul#years {
+  padding: 0px 0px 0px 0px;
+  margin: 5px 0px 0px 0px;
+}
+
+ul li {
+  display: inline;
+  padding-right: 10px;
+  cursor: pointer;
+  font-weight: 100;
+}
+
+ul li.selected {
+  font-weight: bold;
+}
+
 svg {
   font: 10px sans-serif "Helvetica Neue", Helvetica, sans-serif;
-  margin: 20px;
+  margin: 20px auto;
+  display: block;
 }
 
 text.title {
-  font: 900 78px "Helvetica Neue", Helvetica, sans-serif;
+  font: 900 98px "Helvetica Neue", Helvetica, sans-serif;
   fill: #324654;
-  color: #324654;
-
 }
 
 .rule line {
   stroke: #fff;
-  stroke-opacity: .2;
+  stroke-opacity: .6;
   shape-rendering: crispEdges;
 }
 
@@ -22,10 +37,11 @@ text.title {
 }
 
 rect {
-  fill-opacity: .6;
-  fill: #FF765E;
+  fill-opacity: .45;
+  fill: #ad0101;
 }
 
 rect:first-child {
-  fill: #B7BDC4;
+  fill-opacity: .45;
+  fill: #076996;
 }
