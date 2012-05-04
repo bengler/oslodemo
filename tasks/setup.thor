@@ -2,20 +2,22 @@ require "./environment"
 
 # encoding: UTF-8
 
-class Test < Thor
+class Setup < Thor
 
 
-  desc "read_aggregates", "Read aggregate data"
-  def read_aggregates
+  desc "read_aggregate_stats", "Read aggregate data"
+  def read_aggregate_stats
+    print "parsing."
 
-    lines = CSV.parse(File.read("data/oslo_sums_1990_20203.csv"))
+    lines = CSV.parse(File.read("data/oslo_sums_1990_2030.csv"))
 
     CSV.open("public/population_oslo.csv", "wb") do |csv|
       csv << ["year", "age", "sex", "people"]
 
       # year age sex (1-2) people
 
-      8.times do |i|
+      9.times do |i|
+        print "."
         pos = 4 + i*3
         current_set = lines[pos..pos+3]
         year = current_set[0][0].match(/\d*/)[0].to_i
@@ -33,10 +35,11 @@ class Test < Thor
         end
       end
     end
+    puts "\n\nDone\n\n"
   end
 
-  desc "read_demo_sheets", "Read demography sheets"
-  def read_demo_sheets
+  desc "read_burrough_sheets", "Read demography sheets"
+  def read_burrough_sheets
     puts "Munging CSV"
 
     years = []
@@ -75,7 +78,7 @@ class Test < Thor
     bydeler = {}
     delbydeler = {}
 
-    CSV.parse(File.read("./data/delbydel_2007.csv"), :headers => false)[1..-1].each do |row|
+    CSV.parse(File.read("./data/burrough_regions_2007.csv"), :headers => false)[1..-1].each do |row|
       keys = Hash[*fields.zip(row).flatten]
 
       bydel_nr = keys[:bydel_nr].to_i
@@ -91,13 +94,11 @@ class Test < Thor
     end
     puts "\n"
 
-
     result = build_geoJSON(bydeler)
     File.open("./public/regions.json", 'w') {|f| f.write(result.to_json) }
 
     result = build_geoJSON(delbydeler)
     File.open("./public/region_parts.json", 'w') {|f| f.write(result.to_json) }
-
   end
 
   no_tasks do
