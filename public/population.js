@@ -1,19 +1,19 @@
-var width = 660,
+var width = 760,
     height = 500;
 
 var x = d3.scale.linear()
-    .range([0, width]);
+    .range([0, width - 40]);
 
 var y = d3.scale.linear()
-    .range([0, height - 80]);
+    .range([0, height - 20]);
 
 // An SVG element with a bottom-right origin.
+
 var svg = d3.select("#chart").append("svg")
     .attr("width", width)
     .attr("height", height)
-    .style("padding-right", "30px")
   .append("g")
-    .attr("transform", "translate(" + x(1) + "," + (height - 20) + ")scale(-1,-1)");
+    .attr("transform", "translate(" + 60 + "," + (height - 40) + ")scale(1,-1)");
 
 // A sliding container to hold the bars.
 var body = svg.append("g")
@@ -22,14 +22,48 @@ var body = svg.append("g")
 // A container to hold the y-axis rules.
 var rules = svg.append("g");
 
-// A label for the current year.
-var title = svg.append("text")
+
+var legend = svg.append("g")
+    .attr("transform", "translate(" + x(0.63)  + "," + y(0.76) + ")scale(1,-1)");
+
+legend.append("rect")
+  .attr("x", 80)
+  .attr("y", 0)
+  .attr("width", 15)  
+  .attr("height", 15)
+  .attr("fill", "#ad0101")
+  .attr("opacity", "0.5");
+
+legend.append("rect")
+  .attr("x", 140)
+  .attr("y", 0)
+  .attr("width", 15)  
+  .attr("height", 15)
+  .attr("stroke-width", "1px")
+  .attr("stroke-width", "1px")
+
+var title = legend.append("text")
   .attr("class", "title")
-  .attr("dy", "0.88em")
-  .attr("dx", ".1em")
-  .attr("transform", "translate(" + x(1) + "," + y(1) + ")scale(-1,-1)")
+  .attr("dy", "-20")
+  .attr("text-anchor", "start")
   .attr("opacity", ".5")
   .text(1990)
+
+legend.append("text")
+  .attr("x", 100)
+  .attr("y", 12)
+  .attr("class", "legendType")
+  .text("Menn")
+
+legend.append("text")
+  .attr("x", 160)
+  .attr("y", 12)
+  .attr("class", "legendType")
+  .text("Kvinner")
+
+
+
+
 
 d3.csv("population_oslo.csv", function(data) {
 
@@ -51,29 +85,36 @@ var age0 = 0,
 x.domain([0, age1 + 1]);
 y.domain([0, d3.max(data, function(d) { return d.people; })]);
 
-  // Add rules to show the population values.
-  rules = rules.selectAll(".rule")
-      .data(y.ticks(10))
-    .enter().append("g")
-      .attr("class", "rule")
-      .attr("transform", function(d) { return "translate(0," + y(d) + ")"; });
+// Add rules to show the population values.
+rules = rules.selectAll(".rule")
+    .data(y.ticks(10))
+  .enter().append("g")
+    .attr("class", "rule")
+    .attr("transform", function(d) { return "translate(" + x(1) + "," + y(d) + ")scale(1,-1)"; });
 
-  rules.append("line")
-      .attr("x2", width);
+rules.append("line")
+  .attr("x1", width - 40);
 
-  rules.append("text")
-      .attr("x", 6)
-      .attr("dy", ".35em")
-      .attr("transform", "rotate(180)")
-      .text(function(d) { return d; });
+rules.append("text")
+  .attr("x", x(0) - 35)
+  .attr("dy", ".35em")
+  .attr("class", "label")
+  .attr("text-anchor", "left")
+  .text(function(d) { return d; });
 
-  svg.append("text")
-      .attr("x", 6)
-      .attr("dy", "0px")
-      .attr("class", "axisLabel")
-      .text("Antall")
-      .attr("transform", "rotate(-90)");
+svg.append("text")
+  .attr("x", 0)
+  .attr("class", "axisLabel")
+  .attr("text-anchor", "middle")
+  .text("Antall")
+  .attr("transform", "translate(-40," + height/2 + ")rotate(-90)scale(-1,1)");
 
+svg.append("text")
+  .attr("x", 0)
+  .attr("class", "axisLabel")
+  .attr("text-anchor", "middle")
+  .text("Alder")
+  .attr("transform", "translate(" + width/2 + ", -40)scale(-1,1)rotate(180)");
 
 
   // Add labeled rects for each birthyear.
@@ -91,11 +132,12 @@ y.domain([0, d3.max(data, function(d) { return d.people; })]);
 
   // Add labels to show the age.
   svg.append("g").selectAll("text")
-      .data(d3.range(0, age1 + 5, 5))
+      .data(d3.range(0, age1, 5))
     .enter().append("text")
+      .attr("class", "label")
       .attr("text-anchor", "middle")
-      .attr("transform", function(d) { return "translate(" + (x(d) + x(5) / 2) + ",-4)scale(-1,-1)"; })
-      .attr("dy", ".71em")
+      .attr("transform", function(d) { return "translate(" + (x(d) + x(1.5)) + ",-4)scale(1,-1)"; })
+      .attr("dy", "1em")
       .text(String);
 
   // Nest by year then birthyear.
@@ -151,7 +193,7 @@ y.domain([0, d3.max(data, function(d) { return d.people; })]);
 
     body.transition()
         .duration(750)
-        .attr("transform", function(d) { return "translate(" + x(year - year1) + ",0)"; });
+        .attr("transform", function(d) { return "translate(" + x(year - year1 + 1)  + ",0)"; });
 
     years.selectAll("rect")
         .data(function(d) { return data[year][d] || [0, 0]; })

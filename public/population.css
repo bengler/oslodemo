@@ -7,17 +7,38 @@ ul li {
   display: inline;
   padding-right: 10px;
   cursor: pointer;
-  font-weight: 100;
+  font-weight: 300;
+  color: #08a;
 }
+
 
 ul li.selected {
   font-weight: bold;
+  color: #324654;
 }
 
 svg {
   font: 10px sans-serif "Helvetica Neue", Helvetica, sans-serif;
-  margin: 20px auto;
+  margin: 50px auto 0px auto;
   display: block;
+}
+
+g.legend text {
+  font-size: 12pt;  
+}
+
+text.axisLabel {
+  font-size: 12pt;  
+  opacity: 0.7;
+}
+
+text.legendType {
+  font-size: 9pt;  
+}
+
+text.label {
+  font-size: 9pt;  
+  opacity: 0.6;
 }
 
 text.title {
@@ -27,13 +48,15 @@ text.title {
 
 .rule line {
   stroke: #fff;
-  stroke-opacity: .6;
+  stroke-opacity: .7;
   shape-rendering: crispEdges;
+  stroke-width: 1px;
 }
 
 .rule:first-child line {
   stroke: #000;
-  stroke-opacity: 1;
+  stroke-opacity: 0.4;
+  shape-rendering: crispEdges;
 }
 
 rect {
