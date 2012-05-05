@@ -6,7 +6,7 @@ get '/' do
   haml :demo_map
 end
 
-get '/demo' do
+get '/demography' do
   haml :demo
 end
 

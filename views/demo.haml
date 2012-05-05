@@ -3,11 +3,15 @@
 %script{:type => "text/javascript", :src  => "/js_libs/underscorejs.js"}
 %link{:type => "text/css", :rel => "stylesheet", :href => "/population.css"}
 #header
-  #container
+  .container
     %h1
       Demografisk utvikling Oslo
-
     %ul#years
 #chart
+#footer
+  .container
+    Utarbeidet av <a href="http://vis.bengler.no">vis.bengler.no</a> for <a href="http://www.byradsavdeling-for-finans.oslo.kommune.no/">Byrådsavdelingen for finans, Oslo Kommune</a>.
+    Animert befolkningspyramide basert på arbeid av <a href="http://bost.ocks.org/mike/">Mike Bostock</a> og hans bibliotek <a href="https://github.com/mbostock/d3">D3</a>.
+
 
 %script{:type => "text/javascript", :src  => "/population.js"}

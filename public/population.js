@@ -2,7 +2,7 @@ var width = 760,
     height = 500;
 
 var x = d3.scale.linear()
-    .range([0, width - 40]);
+    .range([0, width - 50]);
 
 var y = d3.scale.linear()
     .range([0, height - 20]);
@@ -24,7 +24,7 @@ var rules = svg.append("g");
 
 
 var legend = svg.append("g")
-    .attr("transform", "translate(" + x(0.63)  + "," + y(0.76) + ")scale(1,-1)");
+    .attr("transform", "translate(" + x(0.63)  + "," + y(0.70) + ")scale(1,-1)");
 
 legend.append("rect")
   .attr("x", 80)
@@ -63,8 +63,6 @@ legend.append("text")
 
 
 
-
-
 d3.csv("population_oslo.csv", function(data) {
 
 // Convert strings to numbers.
@@ -96,10 +94,10 @@ rules.append("line")
   .attr("x1", width - 40);
 
 rules.append("text")
-  .attr("x", x(0) - 35)
+  .attr("x", x(0) - 7)
   .attr("dy", ".35em")
   .attr("class", "label")
-  .attr("text-anchor", "left")
+  .attr("text-anchor", "end")
   .text(function(d) { return d; });
 
 svg.append("text")
