@@ -6,6 +6,10 @@ get '/' do
   haml :demo_map
 end
 
+get '/ping' do
+  'oslodemo'
+end
+
 get '/demography' do
   haml :demo
 end

@@ -4,7 +4,6 @@ require "./environment"
 
 class Setup < Thor
 
-
   desc "read_aggregate_stats", "Read aggregate data"
   def read_aggregate_stats
     print "parsing."
@@ -65,6 +64,14 @@ class Setup < Thor
 
   desc "to_geo_json", "Render regions to geojson" 
   def to_geo_json
+
+    require 'data_mapper'
+    require 'dm-postgis'
+
+    DataMapper::Model.raise_on_save_failure = true
+    require './models'
+    DataMapper.setup(:default, 'postgres://localhost/regions')
+    DataMapper.finalize
 
 
     fields = [:bydel_nr, :bydel_navn, :delbydel_nr, :delbydel_navn, :grunnkrets_nr, :grunnkrets_navn]

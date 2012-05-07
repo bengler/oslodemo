@@ -40,16 +40,5 @@ class Demopleth
       .enter().append("path")
       .attr("d", path)
 
-    # d3.json("unemployment.json", function(json) {
-    #   data = json
-    #   counties.selectAll("path")
-    #       .attr("class", quantize)
-    # })
-
-  # quantize: (d) -> 
-  #   "q" + Math.min(8, ~~(data[d.id] * 9 / 12)) + "-9"
-    
-
-
 
 window.Demopleth = Demopleth

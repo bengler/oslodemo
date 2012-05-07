@@ -2,43 +2,38 @@ require 'rubygems'
 require 'bundler/setup'
 require 'logger'
 require 'sinatra'
-require 'data_mapper'
-require 'dm-postgis'
 require 'haml'
 require 'coffee_script'
 require 'sass'
-require 'unicode'
 require 'rack/cache'
 require 'yajl/json_gem'
+require 'o5-logging'
 
 set :root, File.dirname(__FILE__)
 set :haml, :format => :html5
 
-DataMapper::Model.raise_on_save_failure = true
-
 configure :development do
-  PLANAR_URL = "http://hoko.bengler.no:3000"
-  DataMapper.setup(:default, 'postgres://localhost/regions')
 end
 
-
 configure :production do
-  PLANAR_URL = "http://planar.bengler.no"
-  DataMapper.setup(:default, 'postgres://localhost/regions')
 
-  require 'memcached'
+  require 'dalli'
   require 'rack/cache'
+
+  memcache = Dalli::Client.new(:namespace => 'oslodemo', :expires_in => 60*60*24, :compress => true)
+
+  Log = O5.log
+  Dalli.logger = O5.log if defined?(Dalli)
+
   before do
     cache_control :public, :max_age => 172800
   end
+
   use Rack::Cache,
-    :verbose     => true,
-    :metastore   => 'memcached://localhost:11211/meta',
-    :entitystore => 'memcached://localhost:11211/body'
+    :metastore    => Dalli::Client.new,
+    :entitystore  => 'file:tmp/cache/rack/body',
+    :allow_reload => false
+
 end
 
-
-
-require './models'
-DataMapper.finalize
 
