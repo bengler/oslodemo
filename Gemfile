@@ -1,6 +1,5 @@
 source "http://rubygems.org"
 source "http://gemcutter.org"
-gem "i18n"
 gem "yajl-ruby"
 gem "sinatra"
 gem "rack"
@@ -11,11 +10,12 @@ gem "sass"
 gem "dalli"
 gem "rack-cache"  
 gem 'o5-logging', :git => "git://github.com/benglerpebbles/o5-logging.git"
-gem "GeoRuby"
-gem "data_mapper"
-gem "dm-postgres-adapter"
-gem "dm-postgis"
-gem "nokogiri"
-gem "unicode"
-gem "unicode"
-gem "builder"
+
+group :development do
+  gem 'capistrano', '~> 2.9.0'
+  gem 'capistrano-bengler', :git => 'git@github.com:origo/capistrano-bengler.git'
+  gem "data_mapper"
+  gem "dm-postgres-adapter"
+  gem "dm-postgis"
+  gem "GeoRuby"
+end

@@ -3,7 +3,7 @@
 require './environment'
 
 get '/' do
-  haml :demo_map
+  haml :demo
 end
 
 get '/ping' do
@@ -11,7 +11,7 @@ get '/ping' do
 end
 
 get '/demography' do
-  haml :demo
+  haml :demo_map
 end
 
 get '/last_five' do
