@@ -2,14 +2,17 @@
 %script{:type => "text/javascript", :src  => "/js_libs/jquery-1.7.2.min.js"}
 %script{:type => "text/javascript", :src  => "/js/demopleth.js"}
 
-
 #header
   #container
     %h1#case_info
       Oslos demografiske utvikling
+#chart
+#footer
+  .container
+    Utarbeidet av <a href="http://vis.bengler.no">vis.bengler.no</a> for <a href="http://www.byradsavdeling-for-finans.oslo.kommune.no/">Byrådsavdelingen for finans, Oslo Kommune</a>.
+    Animert befolkningspyramide basert på arbeid av <a href="http://bost.ocks.org/mike/">Mike Bostock</a> og hans bibliotek <a href="https://github.com/mbostock/d3">D3</a>.
 
-#container
-  #chart
+
 
 :javascript
   new Demopleth();

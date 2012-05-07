@@ -3,7 +3,6 @@ class Demopleth
   constructor: ->
     console.info("Ignition")
 
-
     path = d3.geo.path()
 
     svg = d3.select("#chart")
@@ -41,7 +40,6 @@ class Demopleth
       .enter().append("path")
       .attr("d", path)
 
-
     # d3.json("unemployment.json", function(json) {
     #   data = json
     #   counties.selectAll("path")
@@ -51,5 +49,7 @@ class Demopleth
   # quantize: (d) -> 
   #   "q" + Math.min(8, ~~(data[d.id] * 9 / 12)) + "-9"
     
+
+
 
 window.Demopleth = Demopleth

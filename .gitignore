@@ -9,6 +9,7 @@ vendor/bundle
 # Not interesting
 /tmp
 .DS_Store
+.rvmrc
 /log
 /pids
 

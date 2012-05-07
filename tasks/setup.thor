@@ -60,13 +60,7 @@ class Setup < Thor
 #      read_regions(male,    :gender => 1)
       read_regions(female,  :gender => 2)
 
-
-
-
     end
-
-
-
   end
 
   desc "to_geo_json", "Render regions to geojson" 
