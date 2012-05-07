@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/bengler/hupper.git
+  revision: 4eb51c501d62be1d84e6cd845e4122e21c4b0b62
+  specs:
+    hupper (0.0.1)
+
+GIT
   remote: git://github.com/benglerpebbles/o5-logging.git
   revision: db9686026912448e19fa0512e46f66c871a45da7
   specs:
@@ -106,9 +112,9 @@ GEM
     raindrops (0.8.0)
     sass (3.1.16)
     sinatra (1.3.2)
-      rack (>= 1.3.6, ~> 1.3)
+      rack (~> 1.3, >= 1.3.6)
       rack-protection (~> 1.2)
-      tilt (>= 1.3.3, ~> 1.3)
+      tilt (~> 1.3, >= 1.3.3)
     stringex (1.3.3)
     tilt (1.3.3)
     unicorn (4.3.0)
@@ -131,6 +137,7 @@ DEPENDENCIES
   dm-postgis
   dm-postgres-adapter
   haml
+  hupper!
   o5-logging!
   rack
   rack-cache

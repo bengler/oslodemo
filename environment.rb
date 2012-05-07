@@ -16,11 +16,9 @@ configure :development do
 end
 
 configure :production do
-
   require 'dalli'
+  require 'hupper'
   require 'rack/cache'
-
-  memcache = Dalli::Client.new(:namespace => 'oslodemo', :expires_in => 60*60*24, :compress => true)
 
   Log = O5.log
   Dalli.logger = O5.log if defined?(Dalli)
@@ -29,11 +27,16 @@ configure :production do
     cache_control :public, :max_age => 172800
   end
 
+  # FIXME way dirty to use global variable, needed for Hupper
+  $memcached = Dalli::Client.new(:namespace => 'oslodemo', :expires_in => 60*60*24, :compress => true)
+
   use Rack::Cache,
-    :metastore    => Dalli::Client.new,
+    :metastore    => $memcached,
+    # FIXME will break on cluster, filesystem is local to each server (obv)
     :entitystore  => 'file:tmp/cache/rack/body',
     :allow_reload => false
 
+  Hupper.on_release do
+    $memcached.close
+  end
 end
-
-
