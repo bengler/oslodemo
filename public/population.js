@@ -4,8 +4,8 @@ if (! (!!document.createElementNS && !!document.createElementNS('http://www.w3.o
   document.location = "stills";
 }
 
-var width = 700,
-    height = 450;
+var width = 760,
+    height = 400;
 
 var x = d3.scale.linear()
     .range([0, width - 50]);
