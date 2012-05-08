@@ -40,5 +40,4 @@ class Demopleth
       .enter().append("path")
       .attr("d", path)
 
-
 window.Demopleth = Demopleth

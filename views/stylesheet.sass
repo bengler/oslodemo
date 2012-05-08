@@ -61,7 +61,7 @@ h1
   :padding 0
   :font-size 20px
   :line-height 27px
-  :text-shadow rgba(30,30,30,0.3) 0px 1px 1px
+  :text-shadow rgba(30,30,30,0.6) 0px 1px 1px
 
 h2 
   :font-weight 300
@@ -75,21 +75,42 @@ ul#years
   :padding 0px 0px 0px 0px
   :margin 5px 0px 0px 0px
 
-ul#years li 
-  :display inline-block
-  :cursor pointer
-  :font-weight 800
-  :color #777
-  :padding 1px 5px 5px 5px
-  :margin-right 5px
-  :border 1px solid #fff
-  :text-shadow rgba(00,00,00,0.2) 0px 1px 1px
+  li 
+    :display inline-block
+    :cursor pointer
+    :font-weight 800
+    :color #777
+    :padding 1px 5px 5px 5px
+    :margin-right 5px
+    :border 1px solid #fff
+    :text-shadow rgba(30,30,30,0.3) 0px 1px 1px
 
-ul#years li.selected 
-  :background-color #78daff
-  :border-radius 2px
-  :border 1px solid #83c3de
-  :color #000
-  :text-shadow #fff 0px 1px 2px
-  :box-shadow 0px 1px 4px rgba(114,114,114,0.5)
 
+    &.selected 
+      :background-color #78daff
+      :opacity 0.9
+      :border-radius 2px
+      :border 1px solid #83c3de
+      :color #000
+      :text-shadow #fff 0px 1px 2px
+      :box-shadow 0px 1px 2px rgba(114,114,114,0.3)
+
+.stills img
+  margin: 20px auto
+  border: 1px solid #ddd
+  padding: 0px
+  display: block
+
+.infobox
+  :width 500px
+  :margin 10px auto
+  :font-size 14px
+  :line-height 16px
+  :padding 10px
+  :background-color #fff
+  :padding 1px solid #eee
+  :color #666
+
+
+.infobox a
+  :color #955

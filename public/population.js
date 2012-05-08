@@ -1,5 +1,12 @@
-var width = 760,
-    height = 500;
+
+// SVG test taken from Modernizr 2.0
+if (! !!document.createElementNS && !!document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect) {
+  document.location = "stills";
+  return
+}
+
+var width = 700,
+    height = 450;
 
 var x = d3.scale.linear()
     .range([0, width - 50]);
@@ -21,7 +28,6 @@ var body = svg.append("g")
 
 // A container to hold the y-axis rules.
 var rules = svg.append("g");
-
 
 var legend = svg.append("g")
     .attr("transform", "translate(" + x(0.63)  + "," + y(0.70) + ")scale(1,-1)");
