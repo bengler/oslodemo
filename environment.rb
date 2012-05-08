@@ -37,6 +37,7 @@ configure :production do
     :allow_reload => false
 
   Hupper.on_release do
-    $memcached.close
+    $memcached_entity.close
+    $memcached_meta.close
   end
 end
