@@ -18,3 +18,16 @@ end
 get '/burroughs' do
   haml :demo_map
 end
+
+get '/ping' do
+  'oslodemo'
+end
+
+get '/burroughs' do
+  haml :demo_map
+end
+
+get "/js/*.js" do
+    filename = params[:splat].first
+    coffee "coffee/#{filename}".to_sym
+end
