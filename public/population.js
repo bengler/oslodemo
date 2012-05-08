@@ -1,8 +1,7 @@
 
 // SVG test taken from Modernizr 2.0
-if (! !!document.createElementNS && !!document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect) {
+if (! (!!document.createElementNS && !!document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect)) {
   document.location = "stills";
-  return
 }
 
 var width = 700,
