@@ -24,7 +24,7 @@ configure :production do
   Dalli.logger = O5.log if defined?(Dalli)
 
   before do
-    cache_control :public, :max_age => 172800
+    cache_control :public, :max_age => 600
   end
 
   # FIXME way dirty to use global variable, needed for Hupper
