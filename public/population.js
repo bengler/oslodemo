@@ -82,7 +82,7 @@ legend.append("rect")
   .attr("width", 15)  
   .attr("height", 15)
   .attr("fill", "#ad0101")
-  .attr("opacity", "0.5");
+  .attr("opacity", "1");
 
 legend.append("rect")
   .attr("x", 140)
@@ -96,7 +96,7 @@ var title = legend.append("text")
   .attr("class", "title")
   .attr("dy", "-20")
   .attr("text-anchor", "start")
-  .attr("opacity", ".5")
+  .attr("opacity", "1")
   .text(1990)
 
 legend.append("text")

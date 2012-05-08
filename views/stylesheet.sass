@@ -2,7 +2,7 @@
 
 body
   :margin 0px 0px 65px 0px
-  :font-family "Helvetica Neue", "Helvetica", "arial", "verdana", sans-serif
+  :font-family "PT Sans", "Helvetica Neue", "Helvetica", "arial", "verdana", sans-serif
   :background url(noise.png)
   :bacgkground-color #fff
 
@@ -29,9 +29,12 @@ text
 #header 
   :top 0px
   :background-color #f8f8f8
-  :box-shadow 0px 2px 2px rgba(90,90,90,0.1)
-  :border-bottom 1px solid #e0e0e0
+  :box-shadow 0px 1px 3px rgba(90,90,90,0.3)
+  :border-bottom 2px solid #69c4e6
+  :border-top 2px solid #fff
   :padding 10px 0px 10px 15px
+  :background url(brillant.png)
+
   :text-transform uppercase
   :opacity 0.8
 
@@ -49,7 +52,7 @@ text
   :margin 50px 0px 0px 0px
 
   a
-    :color #444
+    :color #666
     :font-weight 900
 
 #chart 
@@ -70,6 +73,7 @@ ul#years
   :margin 0px 0px 0px 0px
 
   li 
+    :font-family "PT Sans Narrow"
     :display inline-block
     :cursor pointer
     :font-weight 800
@@ -79,16 +83,17 @@ ul#years
     :border 1px solid transparent
     :text-shadow #fff 0px 2px 2px
 
-
-
     &.selected 
-      :background-color #78daff
-      :opacity 0.9
+      :background-color #90cee2
       :border-radius 2px
       :border 1px solid #83c3de
       :color #000
       :text-shadow #fff 0px 1px 2px
       :box-shadow 0px 1px 2px rgba(114,114,114,0.3)
+
+  li:hover
+    :color #000
+
 
 .stills img
   margin: 20px auto
@@ -109,10 +114,12 @@ ul#years
   &a
     :color #955
 
+
+
 svg 
   :width 90%
   :font 10px sans-serif "Helvetica Neue", Helvetica, sans-serif
-  :margin 30px 0px 0px 20px
+  :margin 30px 0px 0px 35px
   :display block
 
 
@@ -133,11 +140,9 @@ text.label
   :font-size 9pt  
   :opacity 0.6
 
-
 text.title 
   :font 900 98px "Helvetica Neue", Helvetica, sans-serif
-  :fill #324654
-
+  :fill #90cee2
 
 .rule line 
   :stroke #fff
@@ -155,11 +160,13 @@ text.title
 rect 
   :fill-opacity .45
   :fill #ad0101
+  :fill #d50404
 
 
 rect:first-child 
   :fill-opacity .45
   :fill #076996
+  :fill #0a88c2
 
 
 
