@@ -1,11 +1,54 @@
 
+
+var width = 760,
+    height = 380;
+
 // SVG test taken from Modernizr 2.0
 if (! (!!document.createElementNS && !!document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect)) {
   document.location = "stills";
 }
 
-var width = 760,
-    height = 400;
+/*
+  * Normalized hide address bar for iOS & Android
+  * (c) Scott Jehl, scottjehl.com
+  * MIT License
+*/
+
+(function( win ){
+  var doc = win.document;
+
+  // If there's a hash, or addEventListener is undefined, stop here
+  if( !location.hash && win.addEventListener ){
+
+    //scroll to 1
+    window.scrollTo( 0, 1 );
+    var scrollTop = 1,
+      getScrollTop = function(){
+        return win.pageYOffset || doc.compatMode === "CSS1Compat" && doc.documentElement.scrollTop || doc.body.scrollTop || 0;
+      },
+
+      //reset to 0 on bodyready, if needed
+      bodycheck = setInterval(function(){
+        if( doc.body ){
+          clearInterval( bodycheck );
+          scrollTop = getScrollTop();
+          win.scrollTo( 0, scrollTop === 1 ? 0 : 1 );
+        } 
+      }, 15 );
+
+    win.addEventListener( "load", function(){
+      setTimeout(function(){
+        //at load, if user hasn't scrolled more than 20 or so...
+        if( getScrollTop() < 20 ){
+          //reset to hide addr bar at onload
+          win.scrollTo( 0, scrollTop === 1 ? 0 : 1 );
+        }
+      }, 0);
+    } );
+  }
+})( this );
+
+
 
 var x = d3.scale.linear()
     .range([0, width - 50]);
@@ -18,6 +61,8 @@ var y = d3.scale.linear()
 var svg = d3.select("#chart").append("svg")
     .attr("width", width)
     .attr("height", height)
+    .attr("viewBox", "0 0 " + (width + 50) + " " + height)
+    .attr("preserveAspectRatio", "xMidYMid")
   .append("g")
     .attr("transform", "translate(" + 60 + "," + (height - 40) + ")scale(1,-1)");
 
@@ -29,7 +74,7 @@ var body = svg.append("g")
 var rules = svg.append("g");
 
 var legend = svg.append("g")
-    .attr("transform", "translate(" + x(0.63)  + "," + y(0.70) + ")scale(1,-1)");
+    .attr("transform", "translate(" + x(0.63)  + "," + y(0.60) + ")scale(1,-1)");
 
 legend.append("rect")
   .attr("x", 80)
@@ -164,29 +209,66 @@ svg.append("text")
     });
   });
 
+
+  var swipeOptions=
+    {
+      swipe:swipe,
+      threshold:5
+    }
+    
+    $(function()
+    {     
+      //Enable swiping...
+      $("svg").swipe(swipeOptions);
+    });
+  
+    //Swipe handlers.
+    //The only arg passed is the original touch event object      
+    function swipe(event, direction)
+    {
+      if (direction === "right") {
+        decrementYear();
+      }
+
+      if (direction === "left") {
+        incrementYear();
+      }
+    }
+
+
   redraw();
 
   // Allow the arrow keys to change the displayed year.
   d3.select(window).on("keydown", function() {
     switch (d3.event.keyCode) {
       case 37:
-        yearIndex = Math.max(0, yearIndex - 1); 
+        decrementYear();
         break;
       case 39: 
-        yearIndex = Math.min(yearList.length-1, yearIndex + 1); 
+        incrementYear();
         break;
     }
-    year = yearList[yearIndex]
     redraw();
   });
 
+  function incrementYear() {
+    yearIndex = Math.min(yearList.length-1, yearIndex + 1); 
+    redraw();
+  }
+
+  function decrementYear() {
+    yearIndex = Math.max(0, yearIndex - 1); 
+    redraw();
+  }
+
+
   function changeYear(newYear) {
     yearIndex = _.indexOf(yearList, newYear);
-    year = newYear;
     redraw();
   }
 
   function redraw() {
+    year = yearList[yearIndex]
     if (!(year in data)) return;
 
     $('ul#years li').removeClass('selected');
@@ -206,3 +288,5 @@ svg.append("text")
   }
   window.redraw = redraw;
 });
+
+

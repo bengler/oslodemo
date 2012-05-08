@@ -1,7 +1,8 @@
 
 svg {
+  width: 90%;
   font: 10px sans-serif "Helvetica Neue", Helvetica, sans-serif;
-  margin: 30px auto 0px auto;
+  margin: 20px 0px 0px 20px;
   display: block;
 }
 
