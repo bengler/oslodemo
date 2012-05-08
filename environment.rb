@@ -27,13 +27,13 @@ configure :production do
     cache_control :public, :max_age => 600
   end
 
-  # FIXME way dirty to use global variable, needed for Hupper
-  $memcached = Dalli::Client.new(:namespace => 'oslodemo', :expires_in => 60*60*24, :compress => true)
+  $memcached_entity = Dalli::Client.new(:namespace => 'oslodemo_entity', :expires_in => 60*60*24, :compress => true)
+  $memcached_meta = Dalli::Client.new(:namespace => 'oslodemo_meta', :expires_in => 60*60*24, :compress => true)
 
   use Rack::Cache,
-    :metastore    => $memcached,
+    :metastore    => $memcached_meta,
     # FIXME will break on cluster, filesystem is local to each server (obv)
-    :entitystore  => 'file:tmp/cache/rack/body',
+    :entitystore  => $memcached_entity,
     :allow_reload => false
 
   Hupper.on_release do
