@@ -37,30 +37,45 @@ class Setup < Thor
     puts "\n\nDone\n\n"
   end
 
+
   desc "read_burrough_sheets", "Read demography sheets"
   def read_burrough_sheets
+    require 'CSV'
+
     puts "Munging CSV"
 
-    years = []
+    CSV.open("public/population_oslo_burroughs.csv", "wb") do |csv|
 
-    Dir.glob('data/demografi/*').each do |file|
-      lines = CSV.parse(File.read(file))
+      csv << ["burrough", "year", "age", "sex", "people"]
 
-      year = file.match(/bydeler(\d*)/)[1].to_i
-      puts "Reading year: " + year.to_s
+      Dir.glob('data/demografi/*').each do |file|
+        lines = CSV.parse(File.read(file))
 
-      year_result = {}
+        year = file.match(/bydeler(\d*)/)[1].to_i
+        puts "Reading year: " + year.to_s
 
-      totals =  lines[3..3+18]
-      male   =  lines[27..27+18]
-      female =  lines[51..51+18]
+        # totals =  lines[4..4+16]
+        # read_regions(totals,  :gender => 0)
 
-#      read_regions(totals,  :gender => 0)
-#      read_regions(male,    :gender => 1)
-      read_regions(female,  :gender => 2)
+        male_lines = lines[28..28+16]
+        read_regions(male_lines).each_pair do |key, year_array|
+          year_array.each_with_index do |people, age|
+            print age
+            csv << [key, year, age, 1, people]
+          end
+        end
 
+        female_lines =  lines[52..52+16]
+        read_regions(female_lines).each_pair do |key, year_array|
+          year_array.each_with_index do |people, age|
+            print "#{age}/#{people} "
+            csv << [key, year, age, 1, people]
+          end
+        end
+      end
     end
   end
+
 
   desc "to_geo_json", "Render regions to geojson" 
   def to_geo_json
@@ -68,11 +83,9 @@ class Setup < Thor
     require 'data_mapper'
     require 'dm-postgis'
 
-    DataMapper::Model.raise_on_save_failure = true
     require './models'
     DataMapper.setup(:default, 'postgres://localhost/regions')
     DataMapper.finalize
-
 
     fields = [:bydel_nr, :bydel_navn, :delbydel_nr, :delbydel_navn, :grunnkrets_nr, :grunnkrets_navn]
 
@@ -104,8 +117,8 @@ class Setup < Thor
 
   no_tasks do
 
-    def read_regions(regions, options)
-      gender = options[:gender]
+    def read_regions(regions)
+      result = {}
 
       regions.each do |region|
         ident = region.shift
@@ -114,27 +127,24 @@ class Setup < Thor
         name.strip!
 
         if key.empty?
-          key = name 
-          key = key.downcase
-          key = "oslo" if key == "Oslo i alt"
+          key = 16 if name == "Sentrum"
+          key = 17 if name == "Marka"
         end
 
+        # check
         total_check = region.shift
         total = region.inject(0) { |a,b| a + b.to_i }
 
-        year_array = []
-        region.each { |n| year_array << n.to_i }
+        years_array = []
+        region.each { |n| years_array << n.to_i }
 
-        puts "#{key} : #{gender} #{total_check}/#{total}"
+        result[key] = years_array
+
+        puts "#{key}/#{name} : #{total_check}/#{total}"
       end
       puts "\n\n"
+      result
     end
-
-
-    def read_block lines
-      puts lines.inspect
-    end
-
 
     def build_geoJSON region_struct
       result = {
