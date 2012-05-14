@@ -15,12 +15,6 @@ get '/stylesheet.css' do
   sass :stylesheet, :style => :compact
 end
 
-
-get '/ping' do
-  'oslodemo'
-end
-
 get '/burroughs' do
   haml :demo_map
 end
-

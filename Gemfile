@@ -3,14 +3,12 @@ source "http://gemcutter.org"
 gem "yajl-ruby"
 gem "sinatra"
 gem "rack"
-gem "unicorn"
+gem "unicorn", "~> 4.1.1"
 gem "coffee-script"
 gem "haml"
 gem "sass"
 gem "dalli"
 gem "rack-cache"  
-gem 'o5-logging', :git => "git://github.com/benglerpebbles/o5-logging.git"
-gem 'hupper', :git => 'git://github.com/bengler/hupper.git'
 
 group :development do
   gem 'capistrano', '~> 2.9.0'
