@@ -158,7 +158,7 @@ class Setup < Thor
         puts grkretser.inspect
 
         # geometry = repository(:default).adapter.select("SELECT ST_AsGeoJSON(ST_Union(geog)) FROM regions WHERE grkr_tall in (#{grkretser.join(',')})")[0]
-        geometry = repository(:default).adapter.select("SELECT ST_AsGeoJSON(ST_Union(ST_Buffer(geog, 0.0000000010))) FROM regions WHERE grkr_tall in (#{grkretser.join(',')})")[0]
+        geometry = repository(:default).adapter.select("SELECT ST_AsGeoJSON(ST_Simplify(ST_Union(ST_Buffer(geog, 0.0000000010)), 0.0005)) FROM regions WHERE grkr_tall in (#{grkretser.join(',')})")[0]
 
         if geometry 
           geometry = JSON.parse(geometry)

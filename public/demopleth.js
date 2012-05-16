@@ -82,6 +82,8 @@ window.currentBurroughElement = undefined
 
 dataLoaded = jQuery.Deferred();
 csvLoaded = jQuery.Deferred();
+$.when(dataLoaded, csvLoaded).then(function() { redraw()});
+
 
 d3.json("regions.json", function(json) {
   burroughs.selectAll("path")
@@ -106,7 +108,7 @@ d3.json("regions.json", function(json) {
 
     window.currentBurroughElement = el;
 
-    if (! typeof something === "undefined") {
+    if (!(typeof redraw === "undefined")) {
       redraw();
     }
     d3.select(el)
@@ -325,6 +327,7 @@ d3.csv("population_oslo_burroughs.csv", function(data) {
     }
 
     function redraw() {
+      console.info("redraw");
       year = yearList[yearIndex]
       if (!(year in data)) return;
 
@@ -347,5 +350,4 @@ d3.csv("population_oslo_burroughs.csv", function(data) {
     window.redraw = redraw;
     csvLoaded.resolve();
 });
-$.when(dataLoaded, csvLoaded).then(function() { redraw()});
 
