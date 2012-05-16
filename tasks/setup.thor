@@ -129,6 +129,7 @@ class Setup < Thor
         if key.empty?
           key = 16 if name == "Sentrum"
           key = 17 if name == "Marka"
+          key = 17 if name == "Oslo i alt"
         end
 
         # check
@@ -136,7 +137,7 @@ class Setup < Thor
         total = region.inject(0) { |a,b| a + b.to_i }
 
         years_array = []
-        region.each { |n| years_array << n.to_i }
+        region.each { |n| years_array << n }
 
         result[key] = years_array
 

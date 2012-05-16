@@ -6,13 +6,13 @@
 #header
   .container
     %h1
-      Demografisk utvikling Oslo
+      Demografisk utvikling i Oslo for
+      <a href="/">hele byen</a> og <a href="/burroughs">bydelene</a>
     %ul#years
-#chart
+.demography#chart
 #footer
   .container
-    Utarbeidet av <a href="http://vis.bengler.no">vis.bengler.no</a> for <a href="http://www.byradsavdeling-for-finans.oslo.kommune.no/">Byrådsavdelingen for finans, Oslo Kommune</a>.
-    Animert befolkningspyramide basert på arbeid av <a href="http://bost.ocks.org/mike/">Mike Bostock</a> og hans bibliotek <a href="https://github.com/mbostock/d3">D3</a>.
-
+    Kilde: <a href="http://ssb.no">SSB</a>. Utarbeidet av <a href="http://vis.bengler.no">vis.bengler.no</a> for <a href="http://www.byradsavdeling-for-finans.oslo.kommune.no/">Byrådsavdelingen for finans, Oslo Kommune</a>.
+    Animert befolkningspyramide bygget med <a href="https://github.com/mbostock/d3">D3</a>.
 
 %script{:type => "text/javascript", :src  => "/population.js?3"}

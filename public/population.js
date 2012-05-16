@@ -1,5 +1,4 @@
 
-
 var width = 760,
     height = 380;
 

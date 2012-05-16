@@ -7,7 +7,7 @@ body
   :bacgkground-color #fff
 
 #states path
-  :fill #666
+  :fill #aaa
   :opacity 0.3
   :stroke-width 1.1px
   :stroke #fff
@@ -44,16 +44,18 @@ text
   :bottom 0px
   :background-color #eee
   :box-shadow 0px -2px 2px rgba(90,90,90,0.1)
-  :padding 6px 0px 7px 15px
+  :padding 6px 0px 5px 15px
   :font-size 8pt
-  :color #333
+  :color #666
   :border-top #e0e0e0 1px solid
   :border-bottom #e0e0e0 1px solid
   :margin 50px 0px 0px 0px
 
   a
     :color #666
-    :font-weight 900
+    :font-weight 600
+    :text-decoration none
+
 
 #chart 
   :clear both
@@ -66,6 +68,9 @@ h1
   :font-size 20px
   :line-height 27px
   :text-shadow rgba(255,255,255,1) 0px 2px 2px
+
+h1 a
+  :color #666
 
 
 ul#years 
@@ -115,13 +120,21 @@ ul#years
     :color #955
 
 
+.demography#chart
+
+  svg
+    :margin 30px 0px 0px 35px
+    :width 90%
+
+  text.title 
+    :font 900 98px "Helvetica Neue", Helvetica, sans-serif
+
 
 svg 
-  :width 90%
+  :width 100%
   :font 10px sans-serif "Helvetica Neue", Helvetica, sans-serif
-  :margin 30px 0px 0px 35px
   :display block
-
+  :margin 0
 
 g.legend text 
   :font-size 12pt  
@@ -131,18 +144,17 @@ text.axisLabel
   :font-size 12pt  
   :opacity 0.7
   
-
-
 text.legendType 
   :font-size 9pt  
-
+  :color #aaa
+  :opacity 0.6
 
 text.label 
   :font-size 9pt  
   :opacity 0.6
 
 text.title 
-  :font 900 98px "Helvetica Neue", Helvetica, sans-serif
+  :font 900 38px "Helvetica Neue", Helvetica, sans-serif
   :fill #90cee2
 
 .rule line 
@@ -168,7 +180,6 @@ rect:first-child
   :fill-opacity .45
   :fill #076996
   :fill #0a88c2
-
 
 @media only screen and (max-device-width: 480px)
   #footer
