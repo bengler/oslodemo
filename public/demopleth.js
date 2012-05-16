@@ -105,7 +105,10 @@ d3.json("regions.json", function(json) {
     currentBurrough = d;
 
     window.currentBurroughElement = el;
-    redraw();
+
+    if (! typeof something === "undefined") {
+      redraw();
+    }
     d3.select(el)
       .transition()
       .style("fill", "#48a")
@@ -115,12 +118,8 @@ d3.json("regions.json", function(json) {
   currentBurroughElement = burroughs.selectAll("path")[0][0];
   currentBurrough = burroughs.selectAll("path").data()[0];
   selectBurrough(currentBurrough, 0, currentBurroughElement);
-
-
   dataLoaded.resolve();
-  $.when(dataLoaded, csvLoaded).then(function() { redraw()});
 });
-
 
 var graphContainer = svg.append("g")
     .attr("transform", "translate(0,-150)scale(1,-1)");
@@ -348,4 +347,5 @@ d3.csv("population_oslo_burroughs.csv", function(data) {
     window.redraw = redraw;
     csvLoaded.resolve();
 });
+$.when(dataLoaded, csvLoaded).then(function() { redraw()});
 
