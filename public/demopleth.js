@@ -1,10 +1,10 @@
 
 var width = 760,
-    height = 600;
+    height = 425;
 
 // SVG test taken from Modernizr 2.0
 if (! (!!document.createElementNS && !!document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect)) {
-  document.location = "stills";
+  $(".infobox").show()
 }
 
 /*
@@ -65,13 +65,13 @@ var svg = d3.select("#chart").append("svg")
     .attr("viewBox", "0 0 " + (width + 50) + " " + height)
     .attr("preserveAspectRatio", "xMidYMid")
   .append("g")
-    .attr("transform", "translate(" + 60 + "," + (height - 40) + ")");
+    .attr("transform", "translate(" + 60 + "," + (height + 105) + ")");
 
 var data; // loaded asynchronously
 
 var path = d3.geo.path();
 
-var projection = d3.geo.albers().origin([10.739597, 59.910584]).translate([500,-370]).scale(120000)
+var projection = d3.geo.albers().origin([10.739597, 59.910584]).translate([500,-370]).scale(130000)
 var path = d3.geo.path().projection(projection)
 
 var burroughs = svg.append("g")
