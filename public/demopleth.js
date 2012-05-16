@@ -327,7 +327,6 @@ d3.csv("population_oslo_burroughs.csv", function(data) {
     }
 
     function redraw() {
-      console.info("redraw");
       year = yearList[yearIndex]
       if (!(year in data)) return;
 
