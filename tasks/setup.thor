@@ -127,9 +127,9 @@ class Setup < Thor
         name.strip!
 
         if key.empty?
-          key = 16 if name == "Sentrum"
-          key = 17 if name == "Marka"
-          key = 17 if name == "Oslo i alt"
+          # key = 16 if name == "Sentrum"
+          # key = 17 if name == "Marka"
+          # key = 17 if name == "Oslo i alt"
         end
 
         # check

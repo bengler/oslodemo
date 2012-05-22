@@ -93,7 +93,6 @@ d3.json("regions.json", function(json) {
       .attr("d", path)
     .on("mouseover", function(d,i) { 
       selectBurrough(d,i, this);
-
     })
 
   function selectBurrough(d,i,el) {
@@ -105,16 +104,18 @@ d3.json("regions.json", function(json) {
     }
 
     currentBurrough = d;
-
     window.currentBurroughElement = el;
 
     if (!(typeof redraw === "undefined")) {
       redraw();
     }
-    d3.select(el)
-      .transition()
-      .style("fill", "#48a")
-      .style("opacity", "0.5")
+
+    if (currentBurrough.id != 16 && currentBurrough.id != 17) {
+      d3.select(el)
+        .transition()
+        .style("fill", "#48a")
+        .style("opacity", "0.5")
+    }
   }
 
   currentBurroughElement = burroughs.selectAll("path")[0][0];
@@ -254,7 +255,6 @@ d3.csv("population_oslo_burroughs.csv", function(data) {
       .rollup(function(v) { return v.map(function(d) { return d.people; }); })
       .map(data);
 
-
     var yearList = _(data).keys().map( function(i) { i = +i;return i } ).sort()
     var yearIndex = 0
 
@@ -327,7 +327,9 @@ d3.csv("population_oslo_burroughs.csv", function(data) {
     }
 
     function redraw() {
-      year = yearList[yearIndex]
+      year = yearList[yearIndex];
+
+      if (typeof data[year][currentBurrough.id] === "undefined") return;
       if (!(year in data)) return;
 
       $('ul#years li').removeClass('selected');
