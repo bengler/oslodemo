@@ -89,14 +89,14 @@ d3.json("regions.json", function(json) {
   burroughs.selectAll("path")
       .data(json.features)
     .enter().append("path")
-      .attr("class", data ? quantize : null)
+      .attr("class", function(d,i) { if (d.id == 16 || d.id == 17) return "off" })
       .attr("d", path)
     .on("mouseover", function(d,i) { 
       selectBurrough(d,i, this);
     })
 
   function selectBurrough(d,i,el) {
-    if (window.currentBurroughElement != undefined) {
+    if (window.currentBurroughElement != undefined && currentBurrough.id != 16 && currentBurrough.id != 17) {
       d3.select(window.currentBurroughElement)
         .transition()
         .style("fill", "#aaa")
