@@ -11,8 +11,8 @@ gem "dalli"
 gem "rack-cache"  
 
 group :development do
-  gem 'capistrano', '~> 2.9.0'
-  gem 'capistrano-bengler', :git => 'git@github.com:bengler/capistrano-bengler.git'
+  gem 'capistrano', '~> 2.9.0', :require => false
+  gem 'capistrano-bengler', :git => 'git@github.com:bengler/capistrano-bengler.git', :require => false
   gem "data_mapper"
   gem "dm-postgres-adapter"
   gem "dm-postgis"
