@@ -10,7 +10,7 @@ require 'sass'
 require 'rack/cache'
 require 'yajl/json_gem'
 
-set :root, File.dirname(__FILE__)
+set :root, File.dirname(File.dirname(__FILE__))
 set :haml, :format => :html5
 
 configure :development do
