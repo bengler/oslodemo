@@ -9,6 +9,7 @@ gem "haml"
 gem "sass"
 gem "dalli"
 gem "rack-cache"  
+gem "airbrake", "~> 3.1.4", :require => false
 
 group :development do
   gem "data_mapper"
