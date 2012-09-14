@@ -1,4 +1,4 @@
-require "./environment"
+require "./config/environment"
 
 # encoding: UTF-8
 

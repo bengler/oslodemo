@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-require './environment'
+require './config/environment'
 
 get '/' do
   haml :demo
