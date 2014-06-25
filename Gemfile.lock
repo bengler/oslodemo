@@ -1,20 +1,17 @@
 GEM
-  remote: http://rubygems.org/
-  remote: http://gemcutter.org/
+  remote: https://rubygems.org/
   specs:
     GeoRuby (1.3.4)
-    activesupport (2.3.14)
     addressable (2.2.7)
-    airbrake (3.1.4)
+    airbrake (3.1.17)
       builder
-      girl_friday
+      multi_json
     bcrypt-ruby (3.0.1)
-    builder (3.1.3)
+    builder (3.2.2)
     coffee-script (2.2.0)
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
-    connection_pool (0.9.2)
     dalli (2.0.0)
     data_mapper (1.2.0)
       dm-aggregates (~> 1.2.0)
@@ -69,10 +66,8 @@ GEM
     execjs (1.2.12)
       multi_json (~> 1.0)
     fastercsv (1.5.4)
-    girl_friday (0.10.0)
-      connection_pool (~> 0.9.0)
     haml (3.1.4)
-    json (1.6.6)
+    json (1.6.8)
     json_pure (1.6.6)
     kgio (2.9.2)
     multi_json (1.0.4)
@@ -101,7 +96,6 @@ PLATFORMS
 
 DEPENDENCIES
   GeoRuby
-  activesupport (~> 2.3.8)
   airbrake (~> 3.1.4)
   coffee-script
   dalli

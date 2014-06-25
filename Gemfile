@@ -1,5 +1,5 @@
-source "http://rubygems.org"
-source "http://gemcutter.org"
+source "https://rubygems.org"
+
 gem "yajl-ruby"
 gem "sinatra"
 gem "rack"
@@ -10,7 +10,6 @@ gem "sass"
 gem "dalli"
 gem "rack-cache"  
 gem "airbrake", "~> 3.1.4", :require => false
-gem "activesupport", "~> 2.3.8", :require => false # Airbrake needs this, lame
 
 group :development do
   gem "data_mapper"
